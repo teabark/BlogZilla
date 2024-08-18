@@ -38,13 +38,13 @@ function Large_Display() {
       {post.map((item) => (
         <div
           key={item.id}
-          className="p-4 p-md-5 mb-4 rounded text-body-emphasis bg-body-secondary"
+          className="p-4 py-3 mb-4 rounded text-body-emphasis bg-body-secondary display"
         >
           <div className="col-lg-6 px-0">
             <h1 className="display-4 fst-italic">
               {truncateText(item.title, 60)}
             </h1>
-            <p className="lead my-3">{truncateText(item.post_content, 100)}</p>
+            <p className="lead my-1">{truncateText(item.post_content, 100)}</p>
             <p className="lead mb-0">
             <button
                 onClick={() => handleReadMore(item.id)}

@@ -2,9 +2,8 @@ import { useEffect, useState } from "react";
 import EventCard from "../../components/EventCard";
 import Navbar from "../../components/Navbar";
 import Home_Header from "../../components/Home-Header";
-import Footer from "../../components/Footer";
 import axios from "axios";
-
+import Parcel from "../../components/Parcel";
 function Sports() {
   const topic = "sports";
   const [posts, setPost] = useState([]);
@@ -34,16 +33,17 @@ function Sports() {
     <div className="features">
       <Home_Header />
       <Navbar />
+      <div className='parcel container'>
       {posts.map((post) => (
-        <EventCard
-          key={post.id}
-          id={post.id}
-          title={post.title}
-          content={post.post_content}
-          date={post.post_date}
-        />
+   <Parcel key={post.id} 
+   id={post.id}
+   topic={post.topic}
+   title={post.title} 
+   post_date={post.post_date}
+   post_content={post.post_content}
+   />
       ))}
-      <Footer />
+      </div>
     </div>
   );
 }

@@ -1,6 +1,9 @@
-import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+import Home_header from "../components/Home-Header";
 
 function Read() {
   const { id } = useParams(); // Retrieve the id from the URL
@@ -22,10 +25,17 @@ function Read() {
   if (!post) return <div>Loading...</div>;
 
   return (
-    <div>
-      <h1>{post.title}</h1>
-      <p>{post.post_content}</p>
-      {/* Display other post details */}
+    <div className="blog container">
+      <Home_header/>
+      <Navbar />
+      <div className="blog_content">
+        <h6>{post.topic}</h6>
+        <h1>{post.title}</h1>
+        <p>{post.post_date}</p>
+        <div className="post_text">
+          <p>{post.post_content}</p>
+        </div>
+      </div>
     </div>
   );
 }

@@ -13,17 +13,17 @@ function Header() {
             </div>
             <div className="col-4 text-center">
               <a
-                className="blog-header-logo text-body-emphasis text-decoration-none"
-                href="#"
+                className="blog-header-logo text-body-emphasis text-decoration-none font1 logo"
+                onClick={()=>navigate("/dashboard")}
               >
-                BlogZilla
+                <span className="logo-black">Blo</span><span className="logo-red">gZi</span><span className="logo-green">lla</span>
               </a>
             </div>
             <div className="col-4 d-flex justify-content-end align-items-center">
-              <a className="btn btn-sm btn-outline-secondary" onClick={()=>navigate("/register")} href="#">
+              <a className="color-white btn btn-sm  m-3 btn-success" onClick={()=>navigate("/login")} href="#">
                 Sign in
               </a>
-              <a className="btn btn-sm btn-outline-secondary" onClick={()=>navigate("/login")} href="#">
+              <a className="btn btn-sm btn-outline-secondary" onClick={()=>navigate("/register")} href="#">
                 Sign up
               </a>
             </div>

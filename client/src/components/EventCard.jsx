@@ -8,20 +8,22 @@ function EventCard(props) {
         navigate(`/read/${props.id}`);
       };
 
+      const truncateText = (text, length) => {
+        if (text.length <= length) return text;
+        return text.substring(0, length) + "...";
+      };
+
   return (
-    <div className='container'>
-      <div className="row">
-        <div className="col-sm-6 mb-3 mb-sm-0">
+    <div className='container parcels'>
+      <div className="row g-0 border rounded overflow-hidden  mb-4 shadow-sm h-md-250 w-50">
           <div className="card">
             <div className="card-body">
               <h5 className="card-title">{props.title}</h5>
               <p className="card-text">{props.date}</p>
-              <p className="card-text">{props.content}</p>
+              <p className="card-text">{truncateText(props.content, 100)}</p>
               <button onClick={handleNavigate} className="btn btn-primary">
                 Continue reading...
               </button>
-
-            </div>
           </div>
         </div>
         {/* <div className="col-sm-6">

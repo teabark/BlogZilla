@@ -32,6 +32,10 @@ app.post("/register", async (req, res) => {
   const email = req.body.username;
   const password = req.body.password;
 
+  if(!email){
+    return res.status(422).send("Input details")
+  }
+
   try {
     const checkResult = await db.query(
       "SELECT * FROM users WHERE user_email=$1",
@@ -66,6 +70,10 @@ app.post("/register", async (req, res) => {
 app.post("/login", async (req, res) => {
   const email = req.body.username;
   const loginPassword = req.body.password;
+
+  if(!email){
+    return res.status(422).send("Input details")
+  }
 
   try {
     const result = await db.query("SELECT * FROM users where user_email=$1", [

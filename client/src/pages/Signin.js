@@ -39,9 +39,9 @@ function Signin() {
     setPassword("");
 }
   return (
-    <div className='login'>
+    <div className='forms'>
         <form onSubmit={handleSubmit}>
-    <h1 className="h3 mb-3 fw-normal">Sign in</h1>
+    <h1 className="h3 mb-3 fw-normal font1">Sign in</h1>
 
     <div className="form-floating">
       <input type="email" onChange={(e) => setUsername(e.target.value)}  value={username} className="form-control" id="floatingInput" placeHolder="username@example.com"/>
@@ -52,8 +52,7 @@ function Signin() {
       <label for="floatingPassword">Password</label>
       {result ? null : <p className="alert alert-danger mt-3">Wrong password! Try Again!</p>}
     </div>
-    <button className="btn btn-primary w-100 py-2" type="submit">Sign in</button>
-    <p className="mt-5 mb-3 text-body-secondary">© Denzel Jones 2024</p>
+    <button className="btn btn-success w-100 py-2" type="submit">Sign in</button>
   </form>
     </div>
   )

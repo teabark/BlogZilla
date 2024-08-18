@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import EventCard from "../../components/EventCard";
 import Navbar from "../../components/Navbar";
 import Home_Header from "../../components/Home-Header";
-import Footer from "../../components/Footer";
 import axios from "axios";
 
 function Business() {
@@ -43,7 +42,6 @@ function Business() {
           date={post.post_date}
         />
       ))}
-      <Footer />
     </div>
   );
 }

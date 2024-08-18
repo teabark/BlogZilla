@@ -35,9 +35,14 @@ function Signup() {
         });;
     }
   return (
-    <div className='register'>
+    <div className='forms'>
         <form onSubmit={handleSubmit}>
-    <h1 className="h3 mb-3 fw-normal">Register</h1>
+    <h1 className="h3 mb-3 fw-normal font1">
+      <span className='logo-black'>Re</span>
+      <span className='logo-red'>gist</span>
+      <span className='logo-green'>er</span>
+      
+      </h1>
 
     <div className="form-floating">
       <input type="email" onChange={(e) => setUsername(e.target.value)}  value={username} className="form-control" id="floatingInput" placeHolder="username@example.com"/>
@@ -48,8 +53,7 @@ function Signup() {
       <label for="floatingPassword">Password</label>
     </div>
 
-    <button className="btn btn-primary w-100 py-2" type="submit">Register</button>
-    <p className="mt-5 mb-3 text-body-secondary">© Denzel Jones 2024</p>
+    <button className="btn btn-success w-100 py-2" type="submit">Register</button>
   </form>
     </div>
   )

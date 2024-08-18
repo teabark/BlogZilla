@@ -4,7 +4,6 @@ import Navbar from '../components/Navbar'
 import Home_header from '../components/Home-Header'
 import Large_Display from '../components/Large_Display'
 import Parcel from '../components/Parcel'
-import Footer from '../components/Footer'
 
 function Dashboard() {
 
@@ -44,7 +43,6 @@ function Dashboard() {
           />
         ))}
           </div>
-          <Footer/>
     </div>
   )
 }

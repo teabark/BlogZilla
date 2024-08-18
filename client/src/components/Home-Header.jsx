@@ -7,19 +7,13 @@ function Home_header() {
   return (
     <div className="Header">
       <div className="container">
-        <header className="border-bottom lh-1 py-3">
-          <div className="row flex-nowrap justify-content-between align-items-center">
-            <div className="col-4 pt-1">
-            </div>
-            <div className="col-4 text-center">
+        <header className="border-bottom lh-1 py-3 text-center">
               <a
-                className="blog-header-logo text-body-emphasis text-decoration-none"
-                href="#"
+                className="blog-header-logo text-body-emphasis text-decoration-none font1 logo"
+                onClick={()=>navigate("/dashboard")}
               >
-                BlogZilla
+                <span className="logo-black">Blo</span><span className="logo-red">gZi</span><span className="logo-green">lla</span>
               </a>
-            </div>
-          </div>
         </header>
       </div>
     </div>

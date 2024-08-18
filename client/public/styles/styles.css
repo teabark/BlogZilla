@@ -1,5 +1,42 @@
+.font1{
+        font-family: "Abril Fatface", serif;
+        font-weight: 400;
+        font-style: normal;      
+}
+
+.font2{
+        font-family: "Roboto", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+}
+
+
+.logo{
+    font-size: 2.5rem;
+} 
+
+.logo-black{
+    color: rgb(0, 0, 0);
+}
+
+.logo-red{
+    color: rgb(187, 0, 0)
+}
+
+.logo-green{
+    color: rgb(0, 102, 0)
+}
+
 .nav-width{
     width: 100vw;
+}
+
+.display{
+    height: 400px;
+}
+
+.post_text{
+    text-align: justify;
 }
 
 .welcome{
@@ -9,11 +46,63 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    align-items: center;
 }
 
 .parcel{
-    display: flex;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: 500px 500px;
+    grid-template-rows: 350px;
+    gap: 50px;
 }
+
+.parcels{
+    margin: auto;
+}
+.features{
+    height: 90vh;
+}
+.text-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 75vh;
+    font-size: 2rem;
+  }
+  
+  .fade-in-text {
+    color: black;
+    opacity: 0; 
+    animation: fadeIn 6s forwards; 
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+.forms{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
+    align-items:center;
+}
+
+.forms input {
+    width: 600px;
+}
+
+.forms h1, .trademark{
+    text-align: center;
+}
+
+
+
+  
 
