@@ -1,61 +1,89 @@
-import React from 'react'
-import axios from "axios";
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { Fragment, useState } from "react";
+import {Link} from "react-router-dom";
+import {toast} from "react-toastify";
 
-function Signup() {
+function Signup({setAuth}) {
+  const [inputs, setInputs] = useState({
+    email: "",
+    f_name: "",
+    l_name: "",
+    password: "",
+  });
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    const navigate = useNavigate();
+  const { email, f_name, l_name, password} = inputs;
 
-    function handleSubmit(event){
-        event.preventDefault();
+  function onChange(e) {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  }
 
-        axios.post("http://localhost:5000/register", 
-            {
-                username: username,
-                password: password
-            },
-            {headers: {'content-type': 'application/x-www-form-urlencoded'}}
-        )
-        .then((response) => {
-            console.log(response.data);
-            if (response.data === true) {
-                navigate('/dashboard');
-            } else if (response.data === false) {
-                navigate('/login');
-            } else {
-                alert(response.data);
-            }
+  const body = {email, f_name, l_name, password};
+
+  async function onSubmitForm(e){
+    e.preventDefault();
+
+    try{
+        const response = await fetch("http://localhost:5000/auth/register",{
+            method: "POST",
+            headers: {"content-Type" : "application/json"},
+            body: JSON.stringify(body)
         })
-        .catch((error) => {
-            console.error("There was an error registering!", error);
-            navigate('/'); 
-        });;
+
+        const parseResponse = await response.json();
+
+        if(parseResponse.token){
+          localStorage.setItem("token", parseResponse.token);
+          setAuth(true);
+          toast.success("Successfully registered!")
+        } else{
+          setAuth(false);
+          toast.error(parseResponse);
+        }
+
+    }catch(err){
+        console.error(err.message)
     }
+  }
+
   return (
-    <div className='forms'>
-        <form onSubmit={handleSubmit}>
-    <h1 className="h3 mb-3 fw-normal font1">
-      <span className='logo-black'>Re</span>
-      <span className='logo-red'>gist</span>
-      <span className='logo-green'>er</span>
-      
-      </h1>
-
-    <div className="form-floating">
-      <input type="email" onChange={(e) => setUsername(e.target.value)}  value={username} className="form-control" id="floatingInput" placeHolder="username@example.com"/>
-      <label for="floatingInput">Email address</label>
-    </div>
-    <div className="form-floating">
-      <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} className="form-control" id="floatingPassword" placeHolder="Password"/>
-      <label for="floatingPassword">Password</label>
-    </div>
-
-    <button className="btn btn-success w-100 py-2" type="submit">Register</button>
-  </form>
-    </div>
+<Fragment>
+      <h1 className="text-center my-5">Register</h1>
+      <form onSubmit={onSubmitForm}>
+        <input
+          type="email"
+          name="email"
+          placeholder="email"
+          className="form-control my-3"
+          onChange={(e) => onChange(e)}
+          value={email}
+        />
+        <input
+          type="text"
+          name="f_name"
+          placeholder="Enter First Name"
+          className="form-control my-3"
+          onChange={(e) => onChange(e)}
+          value={f_name}
+        />
+        <input
+          type="text"
+          name="l_name"
+          placeholder="Enter Last Name"
+          className="form-control my-3"
+          onChange={(e) => onChange(e)}
+          value={l_name}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          className="form-control my-3"
+          onChange={(e) => onChange(e)}
+          value={password}
+        />
+        <button className="btn btn-success btn-block">Submit</button>
+      </form>
+      <Link to="/login">Login</Link>
+    </Fragment>
   )
 }
 

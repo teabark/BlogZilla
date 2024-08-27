@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
-import EventCard from "../../components/EventCard";
 import Navbar from "../../components/Navbar";
 import Home_Header from "../../components/Home-Header";
+import Parcel from "../../components/Parcel";
 import axios from "axios";
 
-function Technology() {
+function Technology({ setAuth }) {
   const topic = "technology";
   const [posts, setPost] = useState([]);
 
   async function handleData() {
     try {
       const response = await axios.post(
-        "http://localhost:5000/features",
+        "http://localhost:5000/dashboard/features",
         {
           topic: topic,
         },
-        { headers: { "content-type": "application/x-www-form-urlencoded" } }
+        {
+          headers: {
+            "content-type": "application/x-www-form-urlencoded",
+            token: localStorage.token,
+          },
+        }
       );
       console.log("API response:", response.data);
       setPost(response.data);
@@ -24,24 +29,26 @@ function Technology() {
     }
   }
 
-  useEffect(()=>{
-    handleData()
-  }, []
-  );
+  useEffect(() => {
+    handleData();
+  }, []);
 
   return (
     <div className="features">
-      <Home_Header />
+      <Home_Header setAuth={setAuth} />
       <Navbar />
-      {posts.map((post) => (
-        <EventCard
-          key={post.id}
-          id={post.id}
-          title={post.title}
-          content={post.post_content}
-          date={post.post_date}
-        />
-      ))}
+      <div className="parcel container">
+        {posts.map((post) => (
+          <Parcel
+            key={post.id}
+            id={post.id}
+            topic={post.topic}
+            title={post.title}
+            post_date={post.post_date}
+            post_content={post.post_content}
+          />
+        ))}
+      </div>
     </div>
   );
 }

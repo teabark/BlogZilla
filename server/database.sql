@@ -1,7 +1,9 @@
 CREATE TABLE users(
-    id SERIAL PRIMARY KEY,
-    user_email VARCHAR NOT NULL,
-    user_pass VARCHAR NOT NULL
+    user_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(),
+    f_name VARCHAR(255) NOT NULL,
+    l_name VARCHAR(255) NOT NULL,
+    user_email VARCHAR(255) NOT NULL,
+    user_password VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE post(

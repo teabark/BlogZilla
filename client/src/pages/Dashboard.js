@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState} from 'react'
 import axios from 'axios'
 import Navbar from '../components/Navbar'
 import Home_header from '../components/Home-Header'
 import Large_Display from '../components/Large_Display'
 import Parcel from '../components/Parcel'
 
-function Dashboard() {
-
+function Dashboard({setAuth}) {
   const [posts, setPost] = useState([]);
 
   async function getData(){
     try {
       const response = await axios.post(
-        "http://localhost:5000/random",
+        "http://localhost:5000/dashboard/random",
         { count : 2 },
-        { headers: { "content-type": "application/x-www-form-urlencoded" } }
+        { headers: { "content-type": "application/x-www-form-urlencoded", token: localStorage.token } }
       );
       console.log("API response:", response.data);
       setPost(response.data);
@@ -29,7 +28,7 @@ function Dashboard() {
 
   return (
     <div className='dashboard'>
-        <Home_header/>
+        <Home_header setAuth={setAuth}/>
         <Navbar/>
         <Large_Display/>
         <div className='parcel container'>

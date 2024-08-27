@@ -1,61 +1,71 @@
-import {useState} from 'react'
-import { useNavigate } from 'react-router-dom';
-import axios from "axios";
+import { useState, Fragment } from "react";
+import {Link} from "react-router-dom"
+import {toast} from "react-toastify";
 
-function Signin() {
+function Signin({ setAuth }) {
+ 
+  const [inputs, setInputs] = useState({
+    email: "",
+    paasword: "",
+  });
 
-    const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [result, setResult] = useState(true);
+  const {email, password} = inputs;
 
-  const navigate = useNavigate();
+  function onChange(e) {
+    setInputs({ ...inputs, [e.target.name]: e.target.value });
+  }
 
-  function handleSubmit(event){
-    event.preventDefault();
+  async function onSubmitForm(e){
+    e.preventDefault();
+    try{
+      const body = {email, password};
+      const response = await fetch("http://localhost:5000/auth/login", {
+        method: "POST",
+        headers: {"content-type": "application/json"},
+        body: JSON.stringify(body)
+      })
 
-    axios.post("http://localhost:5000/login", 
-        {
-            username: username,
-            password: password
-        },
-        {headers: {'content-type': 'application/x-www-form-urlencoded'}}
-    )
-    .then((response) => {
-        console.log(response.data);
-        if (response.data === true) {
-            navigate('/dashboard');
-            setResult(response.data);
-        } else if (response.data === false) {
-            navigate('/login');
-            setResult(response.data);
-        } else {
-            alert(response.data);
-        }
-    })
-    .catch((error) => {
-        console.error("There was an error logging in!", error);
-        navigate('/'); 
-    });;
-    setPassword("");
-}
+      const parseResponse = await response.json();
+
+      if(parseResponse.token){
+        localStorage.setItem("token", parseResponse.token);
+        toast.success("Login successfully!")
+        setAuth(true);
+      } else{
+        toast.error(parseResponse)
+        setAuth(false)
+      }
+
+    }catch(err){
+      console.error(err.message)
+    }
+  }
+
   return (
-    <div className='forms'>
-        <form onSubmit={handleSubmit}>
-    <h1 className="h3 mb-3 fw-normal font1">Sign in</h1>
-
-    <div className="form-floating">
-      <input type="email" onChange={(e) => setUsername(e.target.value)}  value={username} className="form-control" id="floatingInput" placeHolder="username@example.com"/>
-      <label for="floatingInput">Email address</label>
-    </div>
-    <div className="form-floating">
-      <input type="password" onChange={(e) => setPassword(e.target.value)} value={password} className="form-control" id="floatingPassword" placeHolder="Password"/>
-      <label for="floatingPassword">Password</label>
-      {result ? null : <p className="alert alert-danger mt-3">Wrong password! Try Again!</p>}
-    </div>
-    <button className="btn btn-success w-100 py-2" type="submit">Sign in</button>
-  </form>
-    </div>
-  )
+    <Fragment>
+      <h1 className="text-center my-5">login</h1>
+      <form onSubmit={onSubmitForm}>
+        <input
+          type="email"
+          name="email"
+          placeholder="email"
+          className="form-control my-3"
+          value={email}
+          onChange={(e) => onChange(e)}
+        />
+        <input
+          type="password"
+          name="password"
+          placeholder="password"
+          className="form-control my-3"
+          value={password}
+          onChange={(e) => onChange(e)}
+        />
+        <button className="btn btn-success btn-block">Submit</button>
+      </form>
+      <Link to="/register">Register</Link>
+    </Fragment>
+  );
 }
 
-export default Signin
+export default Signin;

@@ -9,9 +9,9 @@ function Large_Display() {
   async function randomPost() {
     try {
       const response = await axios.post(
-        "http://localhost:5000/random",
+        "http://localhost:5000/dashboard/random",
         { count : 1 },
-        { headers: { "content-type": "application/x-www-form-urlencoded" } }
+        { headers: { "content-type": "application/x-www-form-urlencoded", token: localStorage.token } }
       );
       console.log("API response:", response.data);
       setPost(response.data);

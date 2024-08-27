@@ -1,18 +1,17 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../components/Navbar"
 import Home_header from "../components/Home-Header";
 
-function Read() {
+function Read({setAuth}) {
   const { id } = useParams(); // Retrieve the id from the URL
   const [post, setPost] = useState(null);
 
   useEffect(() => {
     async function fetchPost() {
       try {
-        const response = await axios.get(`http://localhost:5000/posts/${id}`);
+        const response = await axios.get(`http://localhost:5000/dashboard/posts/${id}`,{ headers: {token : localStorage.token}});
         setPost(response.data);
       } catch (error) {
         console.error("Error fetching post:", error);
@@ -26,7 +25,7 @@ function Read() {
 
   return (
     <div className="blog container">
-      <Home_header/>
+      <Home_header setAuth={setAuth}/>
       <Navbar />
       <div className="blog_content">
         <h6>{post.topic}</h6>

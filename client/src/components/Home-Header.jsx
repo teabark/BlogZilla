@@ -1,9 +1,37 @@
+import { useState, useEffect } from "react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import {toast} from "react-toastify";
 
-function Home_header() {
+function Home_header({setAuth}) {
   const navigate = useNavigate();
 
+  const [name, setName] = useState("");
+
+  async function getName(){
+    try{
+      const response = await fetch("http://localhost:5000/dashboard/profile", {
+        method: "GET",
+        headers: {token: localStorage.token}
+      })
+      const parseResponse = await response.json();
+      setName(parseResponse.f_name)
+    }catch(error){
+      console.error(error.message);
+    }
+  }
+
+  useEffect(()=>{
+    getName();
+  }, []);
+
+  function logout(e){
+    e.preventDefault();
+    localStorage.removeItem("token")
+    setAuth(false);
+    toast.success("Successfully logged out!")
+  }
+  
   return (
     <div className="Header">
       <div className="container">
@@ -14,6 +42,8 @@ function Home_header() {
               >
                 <span className="logo-black">Blo</span><span className="logo-red">gZi</span><span className="logo-green">lla</span>
               </a>
+              <div>Welcome {name}</div>
+              <div class="btn btn-warning" onClick={e => logout(e)}>Logout</div>
         </header>
       </div>
     </div>
