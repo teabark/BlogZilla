@@ -17,7 +17,7 @@ function Parcel(props) {
   return (
     <div className="row g-0 border rounded overflow-hidden  mb-4 shadow-sm h-md-250">
       <div className="col p-4 py-2 d-flex flex-column position-static">
-        <strong className="d-inline-block m-2 text-primary-emphasis">{props.topic}</strong>
+        <strong className="d-inline-block m-2 text-primary-emphasis"><span style={{textTransform: "capitalize"}}>{props.topic}</span></strong>
         <h3 className="mb-0 mt-2">{truncateText(props.title, 50)}</h3>
         <div className="mb-1 text-body-secondary">{props.post_date}</div>
         <p className="card-text mb-2">

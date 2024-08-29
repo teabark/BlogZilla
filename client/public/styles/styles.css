@@ -122,6 +122,34 @@ body {
     text-align: center;
 }
 
+/* Hide the default checkbox */
+.checkbox-button input[type="checkbox"] {
+  display: none;
+}
+
+/* Style the checkbox label to look like a button */
+.checkbox-button .btn {
+  padding: 10px 20px;
+  cursor: pointer;
+  border: 1px solid #007bff;
+  border-radius: 4px;
+  display: inline-block;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+/* Style for the checked state */
+.checkbox-button .btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+/* Style for the unchecked state */
+.checkbox-button .btn-outline-primary {
+  background-color: white;
+  color: #007bff;
+}
+
 
 
   

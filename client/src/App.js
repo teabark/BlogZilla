@@ -11,6 +11,9 @@ import Sports from './pages/Features/Sports';
 import Business from './pages/Features/Business';
 import Technology from './pages/Features/Technology';
 import Politics from './pages/Features/Politics';
+import Activity from './pages/Activity';
+import Create from './pages/Create';
+import Edit from './pages/Edit';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -50,6 +53,9 @@ function App() {
           <Route path="/technology" element={isAuthenticated? <Technology setAuth={setAuth}/> : <Navigate to ="/login"/>}/>
           <Route path="/politics" element={isAuthenticated? <Politics setAuth={setAuth}/> : <Navigate to ="/login"/>}/>
           <Route path="/read/:id" element={isAuthenticated? <Read setAuth={setAuth}/> : <Navigate to ="/login"/>} />
+          <Route path="/activity/:id" element={isAuthenticated? <Activity setAuth={setAuth}/> : <Navigate to ="/login"/>}/>
+          <Route path="/create/:id" element={isAuthenticated? <Create/> : <Navigate to ="/login"/>}/>
+          <Route path="/edit/:id" element={isAuthenticated? <Edit/> : <Navigate to = "/login"/>}/>
         </Routes>
         <ToastContainer/>
       </div>

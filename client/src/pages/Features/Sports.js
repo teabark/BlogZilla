@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import EventCard from "../../components/EventCard";
 import Navbar from "../../components/Navbar";
 import Home_Header from "../../components/Home-Header";
 import axios from "axios";

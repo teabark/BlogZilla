@@ -14,8 +14,9 @@ CREATE TABLE post(
     post_content TEXT NOT NULL
 );
 
-INSERT INTO post (topic, title, post_content)
+INSERT INTO post (user_id, topic, title, post_content)
 VALUES (
+    '2279fb21-0302-4de7-a54b-e049d215bb35',
     'sports',
     'Man United 1-0 Fulham: Joshua Zirkzee strikes late on dream debut to secure
      dramatic opening day victory and spare Red Devils blushes after host of missed chances',
